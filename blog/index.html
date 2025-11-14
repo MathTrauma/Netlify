@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>블로그</title>
+    <link rel="stylesheet" href="../trauma.css" />
+    <style>
+        .post-list {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .post-item {
+            margin-bottom: 30px;
+        }
+
+        .post-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .post-date {
+            color: gray;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align:center;">블로그</h1>
+    <div class="post-list" id="postList"></div>
+
+    <script>
+        async function loadPosts() {
+            const response = await fetch('/posts/index.json');
+            const posts = await response.json();
+
+            const list = document.getElementById('postList');
+
+            posts.forEach(post => {
+                const item = document.createElement('div');
+                item.className = 'post-item';
+                item.innerHTML = `
+          <a class="post-title" href="/posts/${post.slug}.html">${post.title}</a>
+          <div class="post-date">${post.date}</div>
+        `;
+                list.appendChild(item);
+            });
+        }
+
+        loadPosts();
+    </script>
+</body>
+
+</html>
