@@ -1,4 +1,37 @@
+############################
+# Netlify Build Configuration
+############################
+
 [build]
+  # 정적 사이트 루트
   publish = "."
+  # 필요 시 posts/ 를 HTML로 빌드하는 스크립트
   command = "node build-posts.js"
 
+
+############################
+# Redirect Rules
+############################
+
+# 1) /admin/* 정적 파일은 리디렉션 금지 — Decap CMS에서 절대 필요
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
+# 2) 나머지 모든 경로는 index.html로 (SPA가 아니라면 옵션)
+#    * static 사이트면 사실 아래 항목이 없어도 됨.
+#    * blog 게시글 slug 대응이 필요하면 유지
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
+############################
+# (Optional) Decap CMS Identity Widget
+############################
+# Netlify Identity 기반 CMS 사용 시 필요.
+# 사이트에서 identity widget 로드가 제대로 되도록 설정.
+[context.production.environment]
+  NODE_ENV = "production"
