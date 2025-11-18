@@ -5,11 +5,15 @@
     <meta charset="UTF-8" />
     <title>CMS Admin</title>
 
-    <!-- jsDelivr CDN -->
+    <!-- Decap CMS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.0/dist/decap-cms.js"></script>
 </head>
 
 <body>
+    <!-- CMS가 UI를 렌더링할 DOM -->
+    <div id="nc-root"></div>
+
+    <!-- 초기화 -->
     <script>
         CMS.init();
     </script>
