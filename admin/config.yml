@@ -1,3 +1,5 @@
+# intentionally left as YAML
+
 backend:
   name: git-gateway
   branch: main
