@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CMS Admin</title>
+
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 
 <body>
-    <!-- CMS가 UI를 렌더링할 루트 -->
-    <div id="nc-root"></div>
+    <!-- Decap CMS 스크립트 -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-    <!-- Decap CMS 로딩 - body 끝에 배치 -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.0/dist/decap-cms.js"></script>
-
-    <!-- CMS 초기화 -->
+    <!-- Netlify Identity 리다이렉트 처리 -->
     <script>
-        if (typeof CMS !== 'undefined') {
-            CMS.init({});
-        } else {
-            console.error('Decap CMS failed to load');
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
         }
     </script>
 </body>
