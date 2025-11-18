@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8" />
     <title>CMS Admin</title>
-
-    <!-- Decap CMS 로딩 (async 제거) -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.0/dist/decap-cms.js"></script>
 </head>
 
 <body>
     <!-- CMS가 UI를 렌더링할 루트 -->
     <div id="nc-root"></div>
 
-    <!-- DOM이 준비된 뒤에 CMS 초기화 -->
+    <!-- Decap CMS 로딩 - body 끝에 배치 -->
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.0/dist/decap-cms.js"></script>
+
+    <!-- CMS 초기화 -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        if (typeof CMS !== 'undefined') {
             CMS.init({});
-        });
+        } else {
+            console.error('Decap CMS failed to load');
+        }
     </script>
 </body>
 
