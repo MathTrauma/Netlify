@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <title>CMS Admin</title>
 
-    <!-- Decap CMS CDN -->
+    <!-- Decap CMS 로딩 (async 제거) -->
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.0/dist/decap-cms.js"></script>
 </head>
 
 <body>
-    <!-- CMS가 UI를 렌더링할 DOM -->
+    <!-- CMS가 UI를 렌더링할 루트 -->
     <div id="nc-root"></div>
 
-    <!-- 초기화 -->
+    <!-- DOM이 준비된 뒤에 CMS 초기화 -->
     <script>
-        CMS.init();
+        document.addEventListener("DOMContentLoaded", function () {
+            CMS.init({});
+        });
     </script>
 </body>
 
